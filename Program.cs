@@ -1,4 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<CbsStudentContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("CbsStudentContext") ?? throw new InvalidOperationException("Connection string 'CbsStudentContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
